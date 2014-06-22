@@ -10,7 +10,7 @@ one:
   author: MyString
   format: MyString
   category_full: MyString
-  category_id: 
+  category_id: one
 
 two:
   title: MyString
@@ -22,4 +22,4 @@ two:
   author: MyString
   format: MyString
   category_full: MyString
-  category_id: 
+  category_id: one
