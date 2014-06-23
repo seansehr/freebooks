@@ -72,7 +72,6 @@ $(function() {
         bubbles: true,
         cancelable: true
       });
-      console.log(eventTrigger);
       event.currentTarget.dispatchEvent(message);
     }
 
