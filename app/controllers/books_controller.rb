@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate
 
   # GET /books
   # GET /books.json
@@ -72,5 +73,11 @@ class BooksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
       params.require(:book).permit(:title, :description, :image_url, :average_rating, :reviews_widget, :isbn, :author, :format, :category_full, :category_id)
+    end
+
+    def authenticate
+      authenticate_or_request_with_http_basic do |username, password|
+        username == ENV['AUTH_USERNAME'] && password == ENV['AUTH_PASSWORD']
+      end
     end
 end
