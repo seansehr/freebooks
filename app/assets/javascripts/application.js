@@ -13,6 +13,18 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require list
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(function() {
+  $(document).foundation();
+
+  $('.review-load').on('click', function(event) {
+    event.preventDefault();
+    var parent = $(this).parent(),
+        reviewWidget = $('.review-textarea', parent).val();
+
+    $('.review-container', parent).append(reviewWidget);
+    $(this).hide();
+  });
+});
