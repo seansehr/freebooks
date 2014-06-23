@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.order(:title)
-    @categories = Category.all
+    @categories = Category.order(:name)
     @categories_list = @categories.each_slice((@categories.count / 3).round).to_a
   end
 

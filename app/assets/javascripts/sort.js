@@ -21,9 +21,11 @@ $(function() {
 
     function categoryLinkSelect(event) {
       event.preventDefault();
-      var els = $('.book-list').find('[data-category="' + this.textContent + '"]');
-      console.log(els);
-      console.log(this.textContent);
+      var $els = $('.book-list').find('[data-category="' + this.textContent + '"]');
+      Foundation.libs.dropdown.closeall();
+      $('html, body').animate({
+        scrollTop: $($els[0]).offset().top - 52
+      }, 500);
     }
 
     function publicInit() {
