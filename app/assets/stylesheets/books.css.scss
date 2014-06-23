@@ -1,3 +1,176 @@
 // Place all the styles related to the Books controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$dark: #231F20;
+$light: #BBBDC0;
+$si-blue: #5690cc;
+$light-blue: #49afcf;
+
+$primary-color: $si-blue;
+$body-font-color: $dark;
+$f-dropdown-font-color: $primary-color;
+
+@import "foundation_and_overrides.scss";
+
+// General Styles
+p {
+  line-height: 1.4;
+}
+
+
+// Buttons
+.button.active {
+  background: $light-blue;
+}
+
+.button.cart {
+  float: right;
+  margin-left: 20px;
+
+  .order-num {
+    border-radius: 50%;
+    background: white;
+    color: $primary-color;
+    height: 13px;
+    width: 13px;
+    display: inline-block;
+
+    .button.active & {
+      color: $light-blue;
+    }
+  }
+}
+
+.button.add-to-order {
+  margin-top: 20px;
+  padding-left: 1.05rem;
+  padding-right: 1.05rem;
+}
+
+
+// Header
+.fixed {
+  background: #eee;
+}
+
+.title-row {
+  position: relative;
+
+  .logo {
+    padding: 6px 0;
+  }
+}
+
+.category-list {
+  display: inline-block;
+  width: 32%;
+}
+
+
+// Order Popup
+.order-form {
+
+  table {
+    width: 100%;
+  }
+
+  .button {
+    margin-bottom: 0;
+  }
+}
+
+.order-header {
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+
+// Book List
+.book-list {
+  margin-top: 50px;
+}
+
+.sort-group {
+  padding-top: 10px;
+  padding-right: 0;
+
+  .button-group,
+  .cart {
+    display: inline-block;
+  }
+
+  .button {
+    border-bottom: 1px solid transparent;
+    margin-bottom: 5px;
+  }
+}
+
+.book-row {
+  border-bottom: 1px solid $light;
+  padding: 30px 0;
+  line-height: 1.4;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+}
+
+.book-info {
+  font-size: rem-calc(12px);
+
+  > div {
+    margin-bottom: 7px;
+  }
+
+  .title {
+    font-size: rem-calc(18px);
+    font-weight: bold;
+  }
+}
+
+.review {
+  margin-top: 10px;
+}
+
+.review-textarea {
+  display: none;
+}
+
+
+// Star CSS
+.fa-star {
+  margin-left: 6px;
+
+  &.star-1{
+    margin-left: 0;
+  }
+}
+
+.fa-star-half {
+  margin-left: -11px;
+  color: transparent;
+}
+
+@for $i from 1 to 5 {
+  [data-stars='#{$i}.0'],
+  [data-stars='#{$i}.5'] {
+    $selector: ();
+    @for $j from $i to 5 {
+      $selector: append(
+        $selector, // 1
+        unquote(".star-#{$j + 1}"), // 2
+        comma // 3
+      );
+      // .star-#{j}
+      #{$selector} {
+        color: $light;
+      }
+    }
+  }
+
+  [data-stars='#{$i}.5'] .half-#{$i + 1} {
+    color: $dark;
+  }
+}
