@@ -12,6 +12,37 @@ $body-font-color: $dark;
 $f-dropdown-font-color: $primary-color;
 
 @import "foundation_and_overrides.scss";
+// For some reason extending font awesome classes doesn't work so lets make it easier
+%icon {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin-left: 5px;
+}
+
+%icon-arrow-down {
+  @extend %icon;
+  content: '\f063';
+}
+
+%icon-arrow-up {
+  @extend %icon;
+  content: '\f062';
+}
+
+%icon-chevron-down {
+  @extend %icon;
+  content: '\f078';
+}
+
+%icon-chevron-up {
+  @extend %icon;
+  content: '\f077';
+}
 
 // General Styles
 p {
@@ -24,7 +55,28 @@ p {
   background: $light-blue;
 }
 
+.button.asc {
+  @extend .button.active;
+  &:after {
+    @extend %icon-arrow-down;
+  }
+}
+
+.button.desc {
+  @extend .button.active;
+  &:after {
+    @extend %icon-arrow-up;
+  }
+}
+
+.button.category {
+  &:after {
+    @extend %icon-chevron-down;
+  }
+}
+
 .button.cart {
+  @extend .button.category;
   float: right;
   margin-left: 20px;
 
@@ -127,6 +179,43 @@ p {
   .title {
     font-size: rem-calc(18px);
     font-weight: bold;
+  }
+}
+
+.description {
+  .inner {
+    height: 200px;
+    overflow: hidden;
+
+    &:before {
+      position: absolute;
+      left: 0;
+      display: block;
+      width: 100%;
+      content: '';
+      background: rgba(255, 255, 255, 0);
+      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…gd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+      background-size: 100%;
+      background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.9));
+      background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.9));
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.9));
+      bottom: 22px;
+      height: 2.8125rem;
+    }
+  }
+
+  .readmore:after {
+    @extend %icon-chevron-down;
+  }
+
+  &.open {
+    .inner {
+      height: auto;
+    }
+
+    .readmore:after {
+      @extend %icon-chevron-up;
+    }
   }
 }
 

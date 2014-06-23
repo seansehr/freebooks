@@ -19,12 +19,39 @@
 $(function() {
   $(document).foundation();
 
+  var descriptionToggle = {
+    close: function (target) {
+      $(target).removeClass('open');
+      $('.readmore', target).text('Read More');
+    },
+    open: function (target) {
+      $(target).addClass('open');
+      $('.readmore', target).text('Read Less');
+    },
+    toggle: function (target) {
+      if ($(target).hasClass('open')) {
+        this.close(target);
+      }
+      else {
+        this.open(target);
+      }
+    }
+  };
+
   $('.review-load').on('click', function(event) {
     event.preventDefault();
     var parent = $(this).parent(),
-        reviewWidget = $('.review-textarea', parent).val();
+        reviewWidget = $('.review-textarea', parent).val(),
+        descriptionDiv = $(this).parents('.description');
 
+    descriptionToggle.open(descriptionDiv);
     $('.review-container', parent).append(reviewWidget);
     $(this).hide();
+  });
+
+  $('.readmore').on('click', function(event) {
+    event.preventDefault();
+    var $parent = $(this).parent('.description');
+    descriptionToggle.toggle($parent);
   });
 });

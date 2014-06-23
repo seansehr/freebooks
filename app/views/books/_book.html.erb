@@ -20,13 +20,16 @@
     </div>
   </div>
   <div class="column small-12 medium-7 description">
-    <%= book.description.html_safe if book.description %>
-    <div class="review">
-      <textarea name="review" id="review" class="review-textarea" cols="30" rows="10">
-        <%= book.reviews_widget %>
-      </textarea>
-      <div class="review-container"></div>
-      <a href="#" class="button tiny review-load">Load Review</a>
+    <div class="inner">
+      <%= book.description.html_safe if book.description %>
+      <div class="review">
+        <textarea name="review" id="review" class="review-textarea" cols="30" rows="10">
+          <%= book.reviews_widget %>
+        </textarea>
+        <div class="review-container"></div>
+        <a href="#" class="button tiny review-load">Load Review</a>
+      </div>
     </div>
+    <a href="#" class="readmore">Read More</a>
   </div>
 </div>

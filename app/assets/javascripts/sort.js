@@ -9,14 +9,12 @@ $(function() {
         bookList = new List('books', options);
 
     function updatedSort(event) {
-      // Has to be somewhere in the event to get this data
       $('.button-group .button.active').removeClass('active');
-      var $button = $('.button-group .button.asc, .button-group .button.desc');
-      $button.addClass('active');
     }
 
     function categorySortDropdown(event) {
       bookList.sort('category', { order: "asc" });
+      $(this).addClass('active');
     }
 
     function categoryLinkSelect(event) {
