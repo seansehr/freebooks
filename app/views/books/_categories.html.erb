@@ -1,0 +1,9 @@
+<% @categories_list.each do |list| %>
+  <ul class="category-list no-bullet">
+    <% list.each do |item| %>
+      <li>
+        <a href="#" class="category-link"><%= item %></a>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

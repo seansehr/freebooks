@@ -5,6 +5,8 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all
+    @categories = Category.all
+    @categories_list = @categories.each_slice((@categories.count / 3).round).to_a
   end
 
   # GET /books/1

@@ -1,43 +1,44 @@
-<h1>Listing books</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Image url</th>
-      <th>Average rating</th>
-      <th>Reviews widget</th>
-      <th>Isbn</th>
-      <th>Author</th>
-      <th>Format</th>
-      <th>Category full</th>
-      <th>Category</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @books.each do |book| %>
-      <tr>
-        <td><%= book.title %></td>
-        <td><%= book.description %></td>
-        <td><%= book.image_url %></td>
-        <td><%= book.average_rating %></td>
-        <td><%= book.reviews_widget %></td>
-        <td><%= book.isbn %></td>
-        <td><%= book.author %></td>
-        <td><%= book.format %></td>
-        <td><%= book.category_full %></td>
-        <td><%= book.category %></td>
-        <td><%= link_to 'Show', book %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Book', new_book_path %>
+<div id="books">
+  <div class="fixed">
+    <div class="row title-row">
+      <div class="column medium-4 logo">
+        <%= image_tag('si-logo.png', alt:'Smashing Ideas Book Order') %>
+      </div>
+      <div class="column medium-8 sort-group text-right">
+        <ul class="button-group">
+          <li><a href="#" class="button tiny sort title" data-sort="title">Title</a></li>
+          <li><a href="#" class="button tiny sort category" data-dropdown="categories-list" data-options="align:left">Category</a></li>
+          <li><a href="#" class="button tiny sort author" data-sort="author">Author</a></li>
+        </ul>
+        <div class="cart">
+          <a href="#" class="button tiny cart" data-dropdown="order-form" data-options="align:left">
+            Order <span class="order-num">0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="book-list">
+    <%= render @books %>
+    <script type="text/javascript">
+      books = <%= @books.to_json.html_safe %>;
+      categories = <%= @categories.to_json.html_safe %>;
+    </script>
+  </div>
+  <div class="f-dropdown content large text-left" id="categories-list" data-dropdown-content>
+    <%= render "categories" %>
+  </div>
+  <div class="order-form f-dropdown content large" id="order-form" data-dropdown-content>
+    <div class="row order-header">
+      <div class="column small-8">
+        Book Order
+      </div>
+      <div class="column small-4 text-right">
+        <span class="order-num">0</span>/7
+      </div>
+    </div>
+    <table class="order-list">
+    </table>
+    <a href="http://intranet.us.randomhouse.com/empfreeord/index.cfm" class="button small right" target="_blank">Order Form</a>
+  </div>
+</div>

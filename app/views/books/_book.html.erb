@@ -1,0 +1,32 @@
+<div class="row book-row" id="book" data-category="<%= book.category.name %>">
+  <div class="column small-4 medium-2">
+    <div><%= image_tag book.image_url %></div>
+    <a href="#" class="button tiny add-to-order" data-isbn="<%= book.isbn %>">Add to Order</a>
+  </div>
+  <div class="column small-8 medium-3 book-info">
+    <div class="title"><%= book.title %></div>
+    <div class="isbn"><%= book.isbn %></div>
+    <div class="author"><%= book.author %></div>
+    <div class="category"><%= book.category_full %></div>
+    <div class="format"><%= book.format %></div>
+    <div class="rating">
+      <div class="stars" data-stars="<%= book.average_rating.star_rating if book.average_rating %>">
+        <%= icon('star', '', class: 'star-1') %><%= icon('star-half', '', class: 'half-1') %>
+        <%= icon('star', '', class: 'star-2') %><%= icon('star-half', '', class: 'half-2') %>
+        <%= icon('star', '', class: 'star-3') %><%= icon('star-half', '', class: 'half-3') %>
+        <%= icon('star', '', class: 'star-4') %><%= icon('star-half', '', class: 'half-4') %>
+        <%= icon('star', '', class: 'star-5') %><%= icon('star-half', '', class: 'half-5') %>
+      </div>
+    </div>
+  </div>
+  <div class="column small-12 medium-7 description">
+    <%= book.description.html_safe if book.description %>
+    <div class="review">
+      <textarea name="review" id="review" class="review-textarea" cols="30" rows="10">
+        <%= book.reviews_widget %>
+      </textarea>
+      <div class="review-container"></div>
+      <a href="#" class="button tiny review-load">Load Review</a>
+    </div>
+  </div>
+</div>
