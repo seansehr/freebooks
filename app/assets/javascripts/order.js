@@ -32,6 +32,12 @@ $(function() {
     }
 
     function loadBooks() {
+      var lastUpdate = localStorage.getItem('updated');
+
+      // If it hasn't been updated in 2 months, reset it.
+      if (!lastUpdate || lastUpdate < (new Date().getTime() - 5256000000)) {
+        localStorage.removeItem('books');
+      }
       if (JSON.parse(localStorage.getItem('books'))) {
         userBooks = JSON.parse(localStorage.getItem('books'));
         userBooks.forEach(function(book) {
@@ -56,6 +62,7 @@ $(function() {
 
     function updateOrder(book, method) {
       $('.order-num').text(userBooks.length);
+      localStorage.setItem('updated', new Date().getTime());
       updateBook(book, method);
     }
 
