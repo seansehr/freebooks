@@ -4,7 +4,11 @@
     <a href="#" class="button tiny add-to-order" data-isbn="<%= book.isbn %>">Add to Order</a>
   </div>
   <div class="column small-8 medium-3 book-info">
-    <div class="title"><%= book.title %></div>
+    <div><%=
+      link_to_if(book.url, book.title, book.url, :target => "_blank", :class=>'title') do
+        content_tag(:span, book.title, {:class=>'title'})
+      end %>
+    </div>
     <div class="isbn"><%= book.isbn %></div>
     <div class="author"><%= book.author %></div>
     <div class="category"><%= book.category_full %></div>

@@ -40,6 +40,7 @@ def get_info book
     book[:image_url] = bookXML.at_xpath('//image_url').content.strip
     book[:average_rating] = bookXML.at_xpath('//average_rating').content.strip
     book[:reviews_widget] = bookXML.at_xpath('//reviews_widget').content.strip
+    book[:url] = bookXML.at_xpath('//url').content.strip
   rescue
     puts "Unable to get info for #{book[:title]}"
   end

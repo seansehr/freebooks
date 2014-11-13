@@ -7,7 +7,11 @@ class BooksController < ApplicationController
   def index
     @books = Book.order(:title)
     @categories = Category.order(:name)
-    @categories_list = @categories.each_slice((@categories.count / 3).round).to_a
+    if @categories.count > 3
+      @categories_list = @categories.each_slice((@categories.count / 3).round).to_a
+    else
+      @categories_list = [@categories]
+    end
   end
 
   # GET /books/1
