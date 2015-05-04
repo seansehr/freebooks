@@ -12,6 +12,8 @@ gem 'jquery-rails' # Use jquery as the JavaScript library
 gem 'nokogiri' # Parse HTML and XML
 gem 'figaro' # Save Environment Vars
 
+gem 'jbuilder' # JSON builder
+
 gem 'spring', group: :development # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 
 # Use debugger
