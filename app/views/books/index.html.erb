@@ -6,7 +6,7 @@
       <div ng-repeat="book in books | categoryFilter:categories | orderBy:sortBy" class="row book-row" data-category="{{ book.category.name }}">
         <div class="column small-4 medium-2">
           <div><img src="{{ book.image_url }}" /></div>
-          <a href="#" class="button tiny add-to-order" ng-click="book.cart = !book.cart">{{ book.cart ? 'Remove from Order' : 'Add to Order' }}</a>
+          <button href="#" class="button tiny add-to-order" ng-click="book.cart = !book.cart">{{ book.cart ? 'Remove from Order' : 'Add to Order' }}</button>
         </div>
         <div class="column small-8 medium-3 book-info">
           <div>
