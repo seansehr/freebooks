@@ -55,28 +55,23 @@ p {
   background: $light-blue;
 }
 
-.button.asc {
-  @extend .button.active;
-  &:after {
-    @extend %icon-arrow-down;
-  }
-}
-
-.button.desc {
-  @extend .button.active;
-  &:after {
-    @extend %icon-arrow-up;
-  }
-}
-
 .button.category {
+  background: $light-blue;
+
   &:after {
     @extend %icon-chevron-down;
+  }
+  &.opened:after {
+    @extend %icon-chevron-up;
+  }
+  &.selected-0 {
+    background: $si-blue;
   }
 }
 
 .button.cart {
   @extend .button.category;
+  background: $si-blue;
   float: right;
   margin-left: 20px;
 
@@ -114,9 +109,51 @@ p {
   }
 }
 
+
+// Sort
+input[data-toggle] {
+  display: none;
+
+  &:checked + label {
+    @extend .button.active;
+  }
+}
+
+.sort-group__sort {
+  margin-right: 50px;
+
+  li:not(first-child) {
+    margin: 0 -0.8rem;
+  }
+}
+
+
+// Filter
+.category-reset.selected-0 {
+  display: none;
+}
+
+// Category List
 .category-list {
-  display: inline-block;
-  width: 32%;
+  padding: .5em 0;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.category {
+  float: left;
+}
+
+// Need to override the checkbox + label specificity.
+.category .category__button {
+  @extend .button;
+  @extend .tiny;
+  @extend .round;
+  background: #bbbbbb;
+  padding: 5px 10px 6px;
+  margin: 3px 5px;
 }
 
 

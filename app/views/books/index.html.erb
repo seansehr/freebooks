@@ -1,44 +1,47 @@
-<div id="books">
-  <div class="fixed">
-    <div class="row title-row">
-      <div class="column medium-4 logo">
-        <%= image_tag('si-logo.png', alt:'Smashing Ideas Book Order') %>
-      </div>
-      <div class="column medium-8 sort-group text-right">
-        <ul class="button-group">
-          <li><a href="#" class="button tiny sort title" data-sort="title">Title</a></li>
-          <li><a href="#" class="button tiny sort category" data-dropdown="categories-list" data-options="align:left">Category</a></li>
-          <li><a href="#" class="button tiny sort author" data-sort="author">Author</a></li>
-        </ul>
-        <div class="cart">
-          <a href="#" class="button tiny cart" data-dropdown="order-form" data-options="align:left">
-            Order <span class="order-num">0</span>
-          </a>
+<div id="books">:
+
+  <div class="book-list">
+
+    <div>
+      <div ng-repeat="book in books | categoryFilter:categories | orderBy:sortBy" class="row book-row" data-category="{{ book.category.name }}">
+        <div class="column small-4 medium-2">
+          <div><img src="{{ book.image_url }}" /></div>
+          <a href="#" class="button tiny add-to-order" ng-click="book.cart = !book.cart">{{ book.cart ? 'Remove from Order' : 'Add to Order' }}</a>
+        </div>
+        <div class="column small-8 medium-3 book-info">
+          <div>
+            <a href="{{ book.url }}" class="title" target="_blank">
+              {{ book.title }}
+            </a>
+          </div>
+          <div class="isbn">{{ book.isbn }}</div>
+          <div class="author">{{ book.author }}</div>
+          <div class="category">{{ book.category_full }}</div>
+          <div class="format">{{ book.format }}</div>
+          <div class="rating">
+            <div class="stars" data-stars="{{ book.average_rating | averageRating | number:1 }}">
+              <%= icon('star', '', class: 'star-1') %><%= icon('star-half', '', class: 'half-1') %>
+              <%= icon('star', '', class: 'star-2') %><%= icon('star-half', '', class: 'half-2') %>
+              <%= icon('star', '', class: 'star-3') %><%= icon('star-half', '', class: 'half-3') %>
+              <%= icon('star', '', class: 'star-4') %><%= icon('star-half', '', class: 'half-4') %>
+              <%= icon('star', '', class: 'star-5') %><%= icon('star-half', '', class: 'half-5') %>
+            </div>
+          </div>
+        </div>
+        <div class="column small-12 medium-7 description">
+          <div class="inner">
+            <div ng-bind-html="book.description"></div>
+            <div class="review">
+              <div class="review-container"></div>
+              <a href="#" class="button tiny review-load" load-review>Load Review</a>
+            </div>
+          </div>
+          <a href="#" class="readmore">Read More</a>
         </div>
       </div>
+
+
+
     </div>
-  </div>
-  <div class="book-list">
-    <%= render @books %>
-    <script type="text/javascript">
-      books = <%= @books.to_json.html_safe %>;
-      categories = <%= @categories.to_json.html_safe %>;
-    </script>
-  </div>
-  <div class="f-dropdown content large text-left" id="categories-list" data-dropdown-content>
-    <%= render "categories" %>
-  </div>
-  <div class="order-form f-dropdown content large" id="order-form" data-dropdown-content>
-    <div class="row order-header">
-      <div class="column small-8">
-        Book Order
-      </div>
-      <div class="column small-4 text-right">
-        <span class="order-num">0</span>/7
-      </div>
-    </div>
-    <table class="order-list">
-    </table>
-    <a href="http://intranet.us.randomhouse.com/empfreeord/index.cfm" class="button small right" target="_blank">Order Form</a>
   </div>
 </div>
