@@ -9,6 +9,7 @@ bookApp.controller('BookListCtrl', function ($scope, $http, $filter) {
         lastUpdate = localStorage.getItem('updated');
     // If it hasn't been updated in 2 months, reset it.
     if (!lastUpdate || lastUpdate < (new Date().getTime() - 5256000000)) {
+      localStorage.removeItem('categories');
       localStorage.removeItem('books');
     }
     // Get user choices from localStorage.
@@ -28,8 +29,13 @@ bookApp.controller('BookListCtrl', function ($scope, $http, $filter) {
     $scope.books = books;
 
     // We only want 1 copy of each category.
-    var filteredCategories = [];
+    var filteredCategories = [],
+        selectedCategories = JSON.parse(localStorage.getItem('categories')) || [];
     angular.forEach(categories, function(category, key) {
+      // Check if it is selected.
+      if (selectedCategories.indexOf(category.name) !== -1) {
+        category.checked = true;
+      }
       // Let the first item be added.
       if (key === 0) {
         filteredCategories.push(category);
@@ -53,6 +59,15 @@ bookApp.controller('BookListCtrl', function ($scope, $http, $filter) {
 
       localStorage.setItem('updated', new Date().getTime());
       localStorage.setItem('books', JSON.stringify(isbns));
+    }, true);
+
+    // Add books to localStorage when added to cart.
+    $scope.$watch('categories', function (newValue, oldvalue) {
+      var filters = $filter('filter')(newValue, {checked: true}),
+      selectedCategories = filters.map(function (category) {
+        return category.name;
+      });
+      localStorage.setItem('categories', JSON.stringify(selectedCategories));
     }, true);
   // TODO: Do something when http errors.
   }).error(function(data, status) {
