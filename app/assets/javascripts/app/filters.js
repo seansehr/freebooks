@@ -42,7 +42,10 @@ bookApp.filter('categoryCount', function($filter) {
 
 // Get the books that are added to the cart.
 bookApp.filter('cart', function($filter) {
-  return function(books) {
+  return function(books, ignore) {
+    if (ignore) {
+      return books;
+    }
     var cart = $filter('filter')(books, {cart: true});
 
     if (typeof cart === 'undefined' || !cart.length) {

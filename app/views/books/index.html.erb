@@ -3,7 +3,7 @@
   <div class="book-list">
 
     <div>
-      <div ng-repeat="book in books | categoryFilter:categories | orderBy:sortBy" class="row book-row" data-category="{{ book.category.name }}">
+      <div ng-repeat="book in books | categoryFilter:categories | cart:!cartFilter | orderBy:sortBy" class="row book-row" data-category="{{ book.category.name }}">
         <div class="column small-4 medium-2">
           <div><img src="{{ book.image_url }}" /></div>
           <button href="#" class="button tiny add-to-order" ng-click="book.cart = !book.cart">{{ book.cart ? 'Remove from Order' : 'Add to Order' }}</button>

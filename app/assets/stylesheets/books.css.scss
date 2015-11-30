@@ -58,9 +58,6 @@ p {
 .button.category {
   background: $light-blue;
 
-  &:after {
-    @extend %icon-chevron-down;
-  }
   &.opened:after {
     @extend %icon-chevron-up;
   }
@@ -70,10 +67,12 @@ p {
 }
 
 .button.cart {
-  @extend .button.category;
-  background: $si-blue;
   float: right;
   margin-left: 20px;
+
+  &:after {
+    @extend %icon-chevron-down;
+  }
 
   .order-num {
     border-radius: 50%;

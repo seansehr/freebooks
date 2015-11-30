@@ -41,9 +41,9 @@
         </ul>
 
         <div class="cart">
-          <a href="#" class="button tiny cart" data-dropdown="order-form" data-options="align:left">
+          <button href="#" class="button tiny cart{{ cartFilter ? ' active' : '' }}" data-dropdown="order-form" data-options="align:left">
             Order <span class="order-num">{{ (books | cart).length}}</span>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -79,6 +79,7 @@
         </td>
       </tr>
     </table>
+    <button ng-click="cartFilter = !cartFilter" class="button small {{ cartFilter ? 'active' : '' }}">Filter by Cart</button>
     <a href="http://intranet.us.randomhouse.com/empfreeord/index.cfm" class="button small right" target="_blank">Order Form</a>
   </div>
 
