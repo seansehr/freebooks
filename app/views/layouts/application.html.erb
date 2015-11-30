@@ -9,10 +9,78 @@
   <%= javascript_include_tag "vendor/modernizr" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body ng-app="bookApp" ng-controller="BookListCtrl">
+  <div class="fixed">
+    <div class="row title-row">
+      <div class="column medium-4 logo">
+        <%= image_tag('si-logo.png', alt:'Smashing Ideas Book Order') %>
+      </div>
+      <div class="column medium-8 sort-group text-right">
+        <ul class="button-group sort-group__sort" data-toggle="buttons-radio">
+          <li>
+            <input type="radio" id="author" name="sort" value="author" ng-model="sortBy" data-toggle="button">
+            <label class="button tiny" for="author">Author</label>
+          </li>
+          <li>
+            <input type="radio" id="category" name="sort" value="category.name" ng-model="sortBy" data-toggle="button">
+            <label class="button tiny" for="category">Category</label>
+          </li>
+          <li>
+            <input type="radio" id="title" name="sort" value="title" ng-model="sortBy" data-toggle="button">
+            <label class="button tiny" for="title">Title</label>
+          </li>
+        </ul>
 
-<%= yield %>
-<%= javascript_include_tag 'application' %>
+        <ul class="button-group">
+          <li>
+            <a href="#" class="button tiny sort category selected-{{categories | categoryCount}}" id="category-filter">Filter by Category</a>
+          </li>
+          <li>
+            <a href="#" class="button tiny sort category-reset selected-{{categories | categoryCount}}" id="category-reset" ng-click="categoryReset()">Reset</a>
+          </li>
+        </ul>
+
+        <div class="cart">
+          <a href="#" class="button tiny cart" data-dropdown="order-form" data-options="align:left">
+            Order <span class="order-num">{{ (books | cart).length}}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row category-list hidden">
+      <div class="category" data-ng-repeat="category in categories">
+        <!-- record that this customer has been selected -->
+        <input type="checkbox" id="{{ category.id }}" class="category__checkbox" ng-checked="category.checked" ng-model="category.checked" data-toggle="button" /> <label for="{{ category.id }}" class="category__button">{{ category.name }}</label>
+      </div>
+    </div>
+  </div>
+
+  <%= yield %>
+  <%= javascript_include_tag 'application' %>
+
+  <div class="order-form f-dropdown content large" id="order-form" data-dropdown-content>
+    <div class="row order-header">
+      <div class="column small-8">
+        Book Order
+      </div>
+      <div class="column small-4 text-right">
+        <span class="order-num">{{ (books | cart).length}}</span>/7
+      </div>
+    </div>
+    <table class="order-list">
+      <tr ng-repeat="book in books | cart">
+        <td>{{ book.isbn }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.category.name }}</td>
+        <td>{{ book.format }}</td>
+        <td>
+          <a href="#" class="add-to-order remove" ng-click="book.cart = !book.cart"><i class="fa fa-minus-square"></i></a>
+        </td>
+      </tr>
+    </table>
+    <a href="http://intranet.us.randomhouse.com/empfreeord/index.cfm" class="button small right" target="_blank">Order Form</a>
+  </div>
 
 </body>
 </html>
