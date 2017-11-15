@@ -8,13 +8,14 @@
 
 def get_books(page)
   books = []
-  page.css('.ctOddRowColor, .ctEvenRowColor').each do |link|
+  page.css('.ctOddRowColor, .ctEvenRowColor').each do |row|
+    cell = row.css('td')[2] # Third cell in the row
     book = {
-      :isbn => link.css('td').first.content.strip,
-      :title => link.css('td')[1].content.strip,
-      :author => link.css('td')[2].content.strip,
-      :category_full => link.css('td')[4].content.strip,
-      :format => link.css('td')[5].content.strip
+      :isbn => cell.children[5].content.strip,
+      :title => cell.css('div').first.content.strip,
+      :author => cell.children[2].content.strip[2..-1], # remove 'by'
+      :category_full => cell.children[8].content.strip,
+      :format => cell.children[10].content.strip[8..-1] # remove 'format:'
     }
     books << book
   end
