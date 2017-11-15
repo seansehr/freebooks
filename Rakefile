@@ -4,3 +4,9 @@
 require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
+
+# simple rebuild the database
+task :heroko_push, [:env] do |t, args|
+  sh "heroku pg:reset DATABASE"
+  sh "heroku run rake db:seed"
+end
